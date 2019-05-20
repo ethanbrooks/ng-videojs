@@ -1,9 +1,11 @@
 import { Component, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { HubConnection } from '@aspnet/signalr';
 import * as signalR from '@aspnet/signalr';
-//import videojs from 'video.js';
-declare var videojs: any;
- 
+
+import videojs from 'video.js';
+
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,8 +20,8 @@ export class AppComponent implements AfterViewInit {
   private _hubConnection: HubConnection | undefined;
   public async: any;
 
+
   poster = 'https://s3.amazonaws.com/my.safepics.com/banner0.jpg';
-  vidObj: any;
   
   ngAfterViewInit() {
     const options = {
@@ -29,12 +31,22 @@ export class AppComponent implements AfterViewInit {
       techOrder: ['html5'],
    };
 
+    let player = new videojs(this.vid.nativeElement, options, function onPlayerReady() {
+    //      this.enterFullScreen();
+          console.log('Your player is ready!');
+          // How about an event listener?
+          this.on('ended', function() {
+            console.log('Awww...over so soon?!');
+          });
+        });
+
 
     this._hubConnection = new signalR.HubConnectionBuilder()
     .withUrl('https://js.devexpress.com/Demos/NetCore/liveUpdateSignalRHub')
     .configureLogging(signalR.LogLevel.Information)
     .build();
 
+    
     this._hubConnection.start().catch(err => console.error(err.toString()));
     var count = 0;
     this._hubConnection.on('updateStockPrice', (data: any) => {
@@ -45,11 +57,11 @@ export class AppComponent implements AfterViewInit {
         console.log(count);
         if(count == 3){
           console.log('PLAYING');
-          this.vidObj.src([
+          player.src([
 //            {type: "video/mp4", src:"/assets/videos/14-01-17-103626-24.mp4"}
             {type:"application/x-mpegURL", src:"/assets/videos/14-01-17-103626-27/stream.m3u8"}
           ]);
-          var promise = this.vidObj.play();    
+          var promise = player.play();    
           if (promise !== undefined) {
             promise.then(function() {
               console.log('Autoplay started!');
@@ -66,13 +78,5 @@ export class AppComponent implements AfterViewInit {
       }
     });
 
-    this.vidObj = new videojs(this.vid.nativeElement, options, function onPlayerReady() {
-//      this.enterFullScreen();
-      console.log('Your player is ready!');
-      // How about an event listener?
-      this.on('ended', function() {
-        console.log('Awww...over so soon?!');
-      });
-    });
   }
 }
