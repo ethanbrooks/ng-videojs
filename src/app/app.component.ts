@@ -27,6 +27,7 @@ export class AppComponent implements AfterViewInit {
     const options = {
       controls: false,
       fluid: true,
+      muted: true,
       preload: 'auto',
       techOrder: ['html5'],
    };
@@ -58,15 +59,15 @@ export class AppComponent implements AfterViewInit {
         if(count == 3){
           console.log('PLAYING');
           player.src([
-//            {type: "video/mp4", src:"/assets/videos/14-01-17-103626-24.mp4"}
+//            {type: "video/mp4", src:"https://s3.amazonaws.com/hh-video/LogoFull_1.mp4"}
             {type:"application/x-mpegURL", src:"/assets/videos/14-01-17-103626-27/stream.m3u8"}
           ]);
           var promise = player.play();    
           if (promise !== undefined) {
             promise.then(function() {
               console.log('Autoplay started!');
-              document.getElementById('videocontent').style.display = 'block';
-              document.getElementById('must-click').style.display = 'none';              
+//              document.getElementById('videocontent').style.display = 'block';
+//              document.getElementById('must-click').style.display = 'none';              
             }).catch(function(error) {
 
               var d = new Date();
