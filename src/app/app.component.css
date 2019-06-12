@@ -1,17 +1,31 @@
-#videocontent{
+::ng-deep #videocontent{
     display: none;
 }
 
-.video-js {
+::ng-deep .video-js {
     position: relative !important;
     width: 100% !important;
     height: auto !important;
 }
 
-.vjs-poster {
+::ng-deep .vjs-poster {
     position: absolute !important;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
+}
+
+::ng-deep .big-red {
+    color: red; 
+    font-size: 24pt;
+}
+
+::ng-deep .little-green {
+    color: green; 
+    font-size: 24pt;
+}
+
+::ng-deep  .vjs-overlay {
+    z-index: 10000000000;
 }

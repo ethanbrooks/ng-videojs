@@ -33,40 +33,28 @@ export class AppComponent implements AfterViewInit {
       //||mustClickElem.webkitRequestFullScreen 
       || mustClickElem['mozRequestFullscreen']
       ||mustClickElem['msRequestFullscreen'];
-    if (methodToBeInvoked) methodToBeInvoked.call(mustClickElem);
+    //if (methodToBeInvoked) methodToBeInvoked.call(mustClickElem);
   }
 
   ngAfterViewInit() {
     const options = {
-      controls: true,
+      controls: false,
       fluid: true,
       preload: 'auto',
+      loop: true,
       techOrder: ['html5'],
    };
 
     let player = new videojs(this.vid.nativeElement, options, function onPlayerReady() {
-
     player.overlay({
-      content: 'Default overlay content',
-      debug: true,
+      content: 'This is the default.',
+      align: 'top-right',
+      class: 'big-red',
       overlays: [{
-        content: 'The video is playing!',
+        content: '<h1>It is playing now</h1>',
+        align: 'top-left',
+        class: 'little-green',
         start: 'play',
-        end: 'pause'
-      }, {
-        start: 0,
-        end: 15,
-        align: 'bottom-left'
-      }, {
-        start: 15,
-        end: 30,
-        align: 'bottom'
-      }, {
-        start: 30,
-        end: 45,
-        align: 'bottom-right'
-      }, {
-        start: 20,
         end: 'pause'
       }]
     });
@@ -74,7 +62,7 @@ export class AppComponent implements AfterViewInit {
      player.on('pause', function()
       {
         console.log('show');
-        document.getElementById('videocontent').innerHTML = '<div style="color:white"><h1>FUCK YOU</h1></div>';
+        document.getElementById('videocontent').innerHTML = '<span style="color:white; font-size: 72pt"><h1>Yo</h1></span>';
       });
     
       player.on('play', function()
@@ -106,11 +94,11 @@ export class AppComponent implements AfterViewInit {
       if(data.symbol == 'MSFT'){
         count++;
         console.log(count);
-        if(count == 3){
+        if(count == 1){
           console.log('PLAYING');
           player.src([
 //            {type: "video/mp4", src:"/assets/videos/14-01-17-103626-24.mp4"}
-{type: "video/mp4", src:"https://hotel-herrera.s3.amazonaws.com/assets/video/mp4/HERRERA_1.mp4"}
+{type: "video/mp4", src:"https://hotel-herrera.s3.amazonaws.com/assets/video/mp4/LogoFull_1.mp4"}
           ]);
           var promise = player.play();    
           if (promise !== undefined) {
