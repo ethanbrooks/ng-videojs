@@ -1,10 +1,13 @@
 <div class="wrapper">
-  <div id="videocontent" class="videocontent">
+    <div id="videocontent" class="videocontent">
       <video
         #myvid 
-        id="fullscreen-video"
+         id="fullscreen-video"
         class="video-js" 
         [poster]="poster">
-    </video>
+        </video>
+    </div>
+    <div id="must-click" (click)="fullScreen()" >
+      <img src="/assets/images/transmision.png" style="height: 100%; width: 100%;"/>
+    </div>
   </div>
-</div>
