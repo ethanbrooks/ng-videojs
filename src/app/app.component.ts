@@ -51,7 +51,7 @@ export class AppComponent implements AfterViewInit {
       align: 'top-right',
       class: 'big-red',
       overlays: [{
-        content: '<h1>It is playing now</h1>',
+        content: 'It is playing now',
         align: 'top-left',
         class: 'little-green',
         start: 'play',

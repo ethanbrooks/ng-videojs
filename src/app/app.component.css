@@ -18,12 +18,14 @@
 
 ::ng-deep .big-red {
     color: red; 
-    font-size: 24pt;
+    font-size: 100px;
+
+    z-index: 10000000000;
 }
 
 ::ng-deep .little-green {
     color: green; 
-    font-size: 24pt;
+    font-size: 100px;
 }
 
 ::ng-deep  .vjs-overlay {
